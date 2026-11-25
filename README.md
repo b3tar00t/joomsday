@@ -115,7 +115,7 @@ bash lab/run_local_poc.sh
 ```
 
 Builds the vulnerable state on loopback and runs the exploit end-to-end. See
-[lab/README.md](lab/README.md) for details and manual steps.
+[lab/README.md](lab/README.md) for details and manual steps..
 
 ## Notes
 
