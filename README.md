@@ -72,18 +72,26 @@ python3 exploit/poc_unauth_rce.py https://target.example --exploit \
 The database must be reachable **from the target**, and the credentials must
 allow creating/populating one schema. The installer creates the schema.
 
-| Option | Meaning |
-|---|---|
+| **Option** | **Meaning** |
+| --- | --- |
+| `--check` | Perform a non-destructive vulnerability/state check |
+| `--exploit` | Run the full destructive exploitation chain |
 | `--db HOST[:PORT]` | Attacker MySQL/MariaDB as reachable from the target |
-| `--db-user/-pass/-name/-prefix` | Schema credentials |
-| `--admin-user/-pass` | Super User to create |
-| `--cmd` | Command executed through the probe (default `id`) |
-| `--proxy`, `--timeout`, `--no-verify` | Network/TLS controls |
-| `--admin-path PATH` | Administrator path (default `/administrator`) |
+| `--db-user USER` | Database username (default: `pwn`) |
+| `--db-pass PASS` | Database password (default: `pwnpw`) |
+| `--db-name NAME` | Database/schema name (default: `pwn`) |
+| `--db-prefix PREFIX` | Joomla table prefix (default: `pwn_`) |
+| `--admin-user USER` | Super User username to create (default: `attacker`) |
+| `--admin-pass PASS` | Super User password (default: `AttackerPass123!`) |
+| `--cmd COMMAND` | Command executed through the PHP probe (default: `id`) |
+| `--proxy URL` | HTTP(S) proxy |
+| `--timeout SECONDS` | Request timeout (default: `30`) |
+| `--no-verify` | Disable TLS certificate verification |
+| `--admin-path PATH` | Administrator path (default: `/administrator`) |
 | `--verbose` | Print raw installer/admin responses |
-| `--restore FILE` | Restore a saved template source, then exit |
-| `--force` | Skip the vulnerable-state gate |
-| `--yes` | Confirm destructive mode non-interactively |
+| `--restore FILE` | Restore a saved template source through the administrator editor |
+| `--force` | Override vulnerable-state and fixed-version safeguards |
+| `--yes` | Confirm destructive operations non-interactively |
 
 Exit codes: `0` success, `1` error, `2` not vulnerable, `3` remote DB host
 refused, `4` configuration not writable, `5` login failed, `6` RCE marker not
