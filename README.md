@@ -130,5 +130,5 @@ Builds the vulnerable state on loopback and runs the exploit end-to-end. See
   headers, but server-side cache plugins can still interfere.
 - `--exploit` overwrites `configuration.php` and removes `installation/`. It is
   destructive.
-- Credits: Dhairya Shukla, Cấn Quang Hiếu, Vedant Shinde, Adham Mohammed Abd
+- PoC Credits: Dhairya Shukla, Cấn Quang Hiếu, Vedant Shinde, Adham Mohammed Abd
   Al-Kawi and Tilaksingh Rana..
