@@ -1,4 +1,4 @@
-# CVE-2026-123214 — Joomla! web installer authentication bypass
+# CVE-2026-123214 (Joomsday) — Joomla! web installer authentication bypass
 
 PoC for **CVE-2026-123214**: on an installed Joomla site, the web installer
 remains usable while `installation/` exists. An unauthenticated attacker can
