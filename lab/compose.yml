@@ -1,0 +1,58 @@
+services:
+  joomla:
+    # Pinned: the advisory is validated against 6.2.0.
+    image: joomla:6.2.0-apache
+    ports:
+      - "${JOOMLA_HOST_IP:-127.0.0.1}:${JOOMLA_HOST_PORT:-18080}:80"
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: joomla-lab-password
+      JOOMLA_DB_NAME: joomla
+      # The official image already sets this permanently. Declared explicitly so
+      # the lab does not silently depend on an image tag, and so the scope of the
+      # reproduction is visible: without this, checkRemoteDbHost() refuses the
+      # second database. See lab/README.md -> "Scope of this lab".
+      JOOMLA_INSTALLATION_DISABLE_LOCALHOST_CHECK: "1"
+    depends_on:
+      db:
+        condition: service_healthy
+      attacker-db:
+        condition: service_healthy
+    volumes:
+      - joomla-data:/var/www/html
+
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: joomla
+      MARIADB_USER: joomla
+      MARIADB_PASSWORD: joomla-lab-password
+      MARIADB_ROOT_PASSWORD: joomla-root-lab-password
+    volumes:
+      - joomla-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  attacker-db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: pwn
+      MARIADB_USER: pwn
+      MARIADB_PASSWORD: pwn-lab-password
+      MARIADB_ROOT_PASSWORD: pwn-root-lab-password
+    volumes:
+      - attacker-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  joomla-data:
+  joomla-db:
+  attacker-db-data:
