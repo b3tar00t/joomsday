@@ -131,4 +131,4 @@ Builds the vulnerable state on loopback and runs the exploit end-to-end. See
 - `--exploit` overwrites `configuration.php` and removes `installation/`. It is
   destructive.
 - Credits: Dhairya Shukla, Cấn Quang Hiếu, Vedant Shinde, Adham Mohammed Abd
-  Al-Kawi and Tilaksingh Rana.
+  Al-Kawi and Tilaksingh Rana..
